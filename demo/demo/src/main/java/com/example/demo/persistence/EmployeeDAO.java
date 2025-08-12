@@ -31,10 +31,38 @@ public class EmployeeDAO {
     }
 
     public void update(final EmployeeEntity entity){
+         try(var connection = ConnectionUtil.getConnection();
+            var statement = connection.createStatement()
+            ){
+                
+                var sql = "UPDATE employees set " + 
+                "name = '" + entity.getName() + "' ," +
+                "salary = " + entity.getSalary().toString() + " ," +
+                "role = '" + formatOfsetDate(entity.getRole())
+                 + "' " +
+                 "WHERE id = " + entity.getId();
+                 
+                statement.executeUpdate(sql);
+               // System.out.printf("Foram afetados %s registros na base de dados", statement.getUpdateCount());
+                    
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
 
     }
 
     public void delete(final long id){
+
+        try(var connection = ConnectionUtil.getConnection();
+            var statement = connection.createStatement()
+            ){
+                var sql = "DELETE FROM employees WHERE id = " + id;
+                statement.executeUpdate(sql);              
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
     }
 
