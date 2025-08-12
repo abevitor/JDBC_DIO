@@ -11,7 +11,7 @@ public class EmployeeEntity {
     
     private long id;
     private String name;
-    private java.time.OffsetDateTime birthday;
+    private java.time.OffsetDateTime role;
     private BigDecimal salary;
 
     
